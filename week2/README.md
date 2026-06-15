@@ -31,9 +31,5 @@ The agent runs inside a beautiful **Textual TUI** (Terminal User Interface) with
 ## How to Run
 
 ```bash
-cd week_2
-pip install -r requirements.txt
-cp .env.example .env
-# Add your OPENROUTER_API_KEY and SERPER_API_KEY in .env
-cd project
+cd week_2/project
 python agent.py
