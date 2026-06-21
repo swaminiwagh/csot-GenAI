@@ -1,0 +1,58 @@
+{
+  "id": "d7452266",
+  "title": "Untitled",
+  "created_at": "2026-06-21T08:42:29.454732+00:00",
+  "updated_at": "2026-06-21T08:42:29.454795+00:00",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are Research Desk, a helpful research agent.\n\n# Research Desk Rules\n\n## Citations\n- Always include source URLs inline: [title](url)\n- For papers: cite as [title](https://arxiv.org/abs/{arxiv_id})\n- Prefer primary sources (papers, official docs) over blog posts\n\n## Papers (required tools)\n- Use `paper_search` for ML research and literature questions\n- Use `read_paper` with the arxiv_id from search results \u2014 do not guess IDs\n- If `read_paper` returns 404, fall back to `web_fetch` on arxiv.org/abs/...\n- Do not use web_search when paper_search is the right tool\n\n## Research notes\n- Save new content with `write_file` to `notes/`\n- Update existing notes with `read_file` then `edit_file`\n- Use `edit_file` operations: `append` for new sections, `replace` to revise, `delete` to remove stale parts\n- Keep edits inside `notes/` unless the user explicitly asks otherwise\n- Use lowercase hyphenated filenames: `notes/topic-name.md`\n\n## Web search\n- Use `web_search` before `web_fetch` for non-paper questions\n- Do not fetch more than 3 pages per question unless the user asks for depth\n\n## Tone\n- Be concise in chat; put detail in the note files"
+    },
+    {
+      "role": "user",
+      "content": "search for papers about transformers and write a note about transformers to notes/transformers.md"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "ec52d1e21cae4042b810dc6c2a4eeb61",
+          "type": "function",
+          "function": {
+            "name": "paper_search",
+            "arguments": "{\"query\":\"transformers\",\"limit\":5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "ec52d1e21cae4042b810dc6c2a4eeb61",
+      "content": "{\"papers\": [{\"arxiv_id\": \"2309.16588\", \"title\": \"Vision Transformers Need Registers\", \"abstract\": \"Transformers have recently emerged as a powerful tool for learning visual\\nrepresentations. In this paper, we identify and characterize artifacts in\\nfeature maps of both supervised and self-supervised ViT networks. The artifacts\\ncorrespond to high-norm tokens appearing during inference primarily in\\nlow-informative background areas of images, that are repurposed for internal\\ncomputations. We propose a simple yet effective solution based on providing\\nadditional tokens to the input sequence of the Vision Transformer to fill that\\nrole. We show that this solution fixes that problem entirely for both\\nsupervised and self-supervised models, sets a new state of the art for\\nself-supervised visual models on dense visual prediction tasks, enables object\\ndiscovery methods with larger models, and most importantly leads to smoother\\nfeature maps and attention maps for downstream visual processing.\", \"url\": \"https://arxiv.org/abs/2309.16588\"}, {\"arxiv_id\": \"2405.21060\", \"title\": \"Transformers are SSMs: Generalized Models and Efficient Algorithms\\n  Through Structured State Space Duality\", \"abstract\": \"While Transformers have been the main architecture behind deep learning's\\nsuccess in language modeling, state-space models (SSMs) such as Mamba have\\nrecently been shown to match or outperform Transformers at small to medium\\nscale. We show that these families of models are actually quite closely\\nrelated, and develop a rich framework of theoretical connections between SSMs\\nand variants of attention, connected through various decompositions of a\\nwell-studied class of structured semiseparable matrices. Our state space\\nduality (SSD) framework allows us to design a new architecture (Mamba-2) whose\\ncore layer is an a refinement of Mamba's selective SSM that is 2-8X faster,\\nwhile continuing to be competitive with Transformers on language modeling.\", \"url\": \"https://arxiv.org/abs/2405.21060\"}, {\"arxiv_id\": \"2405.17399\", \"title\": \"Transformers Can Do Arithmetic with the Right Embeddings\", \"abstract\": \"The poor performance of transformers on arithmetic tasks seems to stem in\\nlarge part from their inability to keep track of the exact position of each\\ndigit inside of a large span of digits. We mend this problem by adding an\\nembedding to each digit that encodes its position relative to the start of the\\nnumber. In addition to the boost these embeddings provide on their own, we show\\nthat this fix enables architectural modifications such as input injection and\\nrecurrent layers to improve performance even further.\\n  With positions resolved, we can study the logical extrapolation ability of\\ntransformers. Can they solve arithmetic problems that are larger and more\\ncomplex than those in their training data? We find that training on only 20\\ndigit numbers with a single GPU for one day, we can reach state-of-the-art\\nperformance, achieving up to 99% accuracy on 100 digit addition problems.\\nFinally, we show that these gains in numeracy also unlock improvements on other\\nmulti-step reasoning tasks including sorting and multiplication.\", \"url\": \"https://arxiv.org/abs/2405.17399\"}, {\"arxiv_id\": \"2406.09308\", \"title\": \"Transformers meet Neural Algorithmic Reasoners\", \"abstract\": \"Transformers have revolutionized machine learning with their simple yet\\neffective architecture. Pre-training Transformers on massive text datasets from\\nthe Internet has led to unmatched generalization for natural language\\nunderstanding (NLU) tasks. However, such language models remain fragile when\\ntasked with algorithmic forms of reasoning, where computations must be precise\\nand robust. To address this limitation, we propose a novel approach that\\ncombines the Transformer's language understanding with the robustness of graph\\nneural network (GNN)-based neural algorithmic reasoners (NARs). Such NARs\\nproved effective as generic solvers for algorithmic tasks, when specified in\\ngraph form. To make their embeddings accessible to a Transformer, we propose a\\nhybrid architecture with a two-phase training procedure, allowing the tokens in\\nthe language model to cross-attend to the node embeddings from the NAR. We\\nevaluate our resulting TransNAR model on CLRS-Text, the text-based version of\\nthe CLRS-30 benchmark, and demonstrate significant gains over Transformer-only\\nmodels for algorithmic reasoning, both in and out of distribution.\", \"url\": \"https://arxiv.org/abs/2406.09308\"}, {\"arxiv_id\": \"2405.15071\", \"title\": \"Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to\\n  the Edge of Generalization\", \"abstract\": \"We study whether transformers can learn to implicitly reason over parametric\\nknowledge, a skill that even the most capable language models struggle with.\\nFocusing on two representative reasoning types, composition and comparison, we\\nconsistently find that transformers can learn implicit reasoning, but only\\nthrough grokking, i.e., extended training far beyond overfitting. The levels of\\ngeneralization also vary across reasoning types: when faced with\\nout-of-distribution examples, transformers fail to systematically generalize\\nfor composition but succeed for comparison. We delve into the model's internals\\nthroughout training, conducting analytical experiments that reveal: 1) the\\nmechanism behind grokking, such as the formation of the generalizing circuit\\nand its relation to the relative efficiency of generalizing and memorizing\\ncircuits, and 2) the connection between systematicity and the configuration of\\nthe generalizing circuit. Our findings guide data and training setup to better\\ninduce implicit reasoning and suggest potential improvements to the transformer\\narchitecture, such as encouraging cross-layer knowledge sharing. Furthermore,\\nwe demonstrate that for a challenging reasoning task with a large search space,\\nGPT-4-Turbo and Gemini-1.5-Pro based on non-parametric memory fail badly\\nregardless of prompting styles or retrieval augmentation, while a fully grokked\\ntransformer can achieve near-perfect accuracy, showcasing the power of\\nparametric memory for complex reasoning.\", \"url\": \"https://arxiv.org/abs/2405.15071\"}]}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "6fe18d0423d14f9381b08fffc05a44ca",
+          "type": "function",
+          "function": {
+            "name": "write_file",
+            "arguments": "{\"path\":\"notes/transformers.md\",\"content\":\"# Transformers: Recent Research Insights\\n\\n## Key Papers\\n1. **[Vision Transformers Need Registers](https://arxiv.org/abs/2309.16588)**\\n   - Identifies artifacts in ViT feature maps and proposes a solution using additional tokens.\\n   - Improves performance for supervised and self-supervised models.\\n\\n2. **[Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality](https://arxiv.org/abs/2405.21060)**\\n   - Connects Transformers and state-space models (SSMs) via structured semiseparable matrices.\\n   - Introduces Mamba-2, a faster and competitive alternative to Transformers.\\n\\n3. **[Transformers Can Do Arithmetic with the Right Embeddings](https://arxiv.org/abs/2405.17399)**\\n   - Addresses positional tracking in arithmetic tasks using specialized embeddings.\\n   - Achieves 99% accuracy on 100-digit addition problems.\\n\\n4. **[Transformers meet Neural Algorithmic Reasoners](https://arxiv.org/abs/2406.09308)**\\n   - Combines Transformers with GNN-based neural algorithmic reasoners (NARs).\\n   - Enhances algorithmic reasoning capabilities in language models.\\n\\n5. **[Grokked Transformers are Implicit Reasoners](https://arxiv.org/abs/2405.15071)**\\n   - Explores implicit reasoning in Transformers through grokking.\\n   - Highlights systematic generalization challenges and solutions.\\n\\n## Summary\\nTransformers continue to evolve, addressing limitations in vision, arithmetic, and algorithmic reasoning. Hybrid architectures and specialized embeddings are key trends.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "6fe18d0423d14f9381b08fffc05a44ca",
+      "content": "{\"status\": \"written\"}"
+    },
+    {
+      "role": "assistant",
+      "content": "I've successfully written a note about recent research on transformers to `notes/transformers.md`. The note includes summaries of five key papers, covering topics like vision transformers, arithmetic capabilities, and hybrid architectures with neural algorithmic reasoners. Let me know if you'd like to explore any of these papers in more detail!"
+    }
+  ]
+}
