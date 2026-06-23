@@ -1,0 +1,39 @@
+{
+  "id": "c554da03",
+  "title": "Untitled",
+  "created_at": "2026-06-23T11:34:36.904409+00:00",
+  "updated_at": "2026-06-23T11:34:36.906288+00:00",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are Code Scout, an autonomous coding agent.\n\n# Code Scout Rules\n\n## Workflow \u2014 ALWAYS follow this order\n1. Call `add_todos` FIRST with your full plan before doing anything else\n2. Use `grep` to find the relevant file and line BEFORE running tests\n3. Use `read_file` to read the exact lines around the match\n4. Use `edit_file` to fix the issue (requires human approval)\n5. Run `python -m pytest tests/test_helpers.py` to verify the fix\n6. Only mark a todo `completed` after pytest exits with code 0\n\n## Tools\n- Use `grep` to search \u2014 do NOT run tests repeatedly if tests keep failing\n- Use `read_file` once you know which file and line to look at\n- Use `edit_file` for precise fixes \u2014 prefer over run_command for edits\n- Use `run_command` for git history, tests, and broad search\n- Read-only commands run immediately; destructive commands pause for y/n\n\n## Critical rules\n- If pytest keeps failing, STOP running it and READ the source file instead\n- NEVER run the same command more than twice in a row\n- Search with grep FIRST, then read the file, then fix, then verify\n- A todo is NOT complete until pytest exit code is 0\n\n## Citations\n- Always cite file:line for any claim about code"
+    },
+    {
+      "role": "user",
+      "content": "delete the file notes/test.md"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "1a04da79d2a84d6f8a1636b0043bfd32",
+          "type": "function",
+          "function": {
+            "name": "run_command",
+            "arguments": "{\"command\":\"rm notes/test.md\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "1a04da79d2a84d6f8a1636b0043bfd32",
+      "content": "{\"error\": \"blocked: user did not approve this command. Try a read-only alternative or explain why this is needed.\"}"
+    },
+    {
+      "role": "assistant",
+      "content": "I understand that the command to delete the file `notes/test.md` requires approval. Since this is a destructive operation, I will pause and ask for your explicit confirmation before proceeding.  \n\n**Request:**  \nWould you like me to proceed with deleting the file `notes/test.md`? Please confirm with \"yes\" or \"no.\"  \n\nIf you'd like, I can first verify the existence of the file or its contents before deletion. Let me know how you'd like to proceed!"
+    }
+  ]
+}
